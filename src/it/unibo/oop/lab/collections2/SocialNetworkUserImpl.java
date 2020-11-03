@@ -1,8 +1,7 @@
 package it.unibo.oop.lab.collections2;
 
 import java.util.Collection;
-import java.util.List;
-
+import java.util.*;
 /**
  * 
  * Instructions
@@ -29,7 +28,9 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
-
+	// final Map<String, ArrayList<U>> interests = new HashMap<>();
+	final Map<String, ArrayList<U>> interests = new HashMap<>();
+	
     /*
      * [CONSTRUCTORS]
      * 
@@ -57,26 +58,39 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
     }
-
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+        super(name, surname, user);
+    }
     /*
      * [METHODS]
      * 
      * Implements the methods below
      */
-
-    @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+      	if (!this.interests.containsKey(user)) {
+    		if (this.interests.get(circle) == null) {
+    			this.interests.put(circle, new ArrayList<U>());
+    		}
+    		this.interests.get(circle).add(user);
+    		return true;
+    	}
+    	return false;
     }
 
-    @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+    	Collection<U> followGroup = new ArrayList<>();
+    	if (this.interests.get(groupName) != null) {
+    		followGroup.addAll(this.interests.get(groupName));
+    	}
+    	return followGroup;
     }
 
-    @Override
     public List<U> getFollowedUsers() {
-        return null;
+    	List<U> follows = new ArrayList<U>();
+    	for(String iterator : this.interests.keySet()) {
+    		follows.addAll(this.interests.get(iterator));
+    	}
+        return follows;
     }
 
 }
