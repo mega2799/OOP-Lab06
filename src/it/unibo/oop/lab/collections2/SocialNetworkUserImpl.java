@@ -28,8 +28,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
-	// final Map<String, ArrayList<U>> interests = new HashMap<>();
-	final Map<String, ArrayList<U>> interests = new HashMap<>();
+	private final Map<String, ArrayList<U>> interests = new HashMap<>();
 	
     /*
      * [CONSTRUCTORS]
@@ -71,8 +70,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     		if (this.interests.get(circle) == null) {
     			this.interests.put(circle, new ArrayList<U>());
     		}
-    		this.interests.get(circle).add(user);
-    		return true;
+    		return this.interests.get(circle).add(user);
     	}
     	return false;
     }
