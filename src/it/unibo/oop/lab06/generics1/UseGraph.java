@@ -13,12 +13,13 @@ public final class UseGraph {
      *            ignored
      */
     public static void main(final String... args) {
-        final Graph<String> g = null; // new GraphImpl<>();
+        final Graph<String> g = new GraphImpl<>();
         g.addNode("a");
         g.addNode("b");
         g.addNode("c");
         g.addNode("d");
         g.addNode("e");
+        
         g.addEdge("a", "b");
         g.addEdge("b", "c");
         g.addEdge("c", "d");
@@ -36,6 +37,7 @@ public final class UseGraph {
         /*
          * Must print either the path b,c,a or b,c,d,e,a
          */
-        System.out.println(g.getPath("b", "a"));
+        // System.out.println(g.getPath("b", "a"));
+        System.out.println(g.getPath("b", "b"));
     }
 }
