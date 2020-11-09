@@ -76,11 +76,11 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     }
 
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-    	Collection<U> followGroup = new ArrayList<>();
-    	if (this.interests.get(groupName) != null) {
-    		followGroup.addAll(this.interests.get(groupName));
+    	Collection<U> followGroup = this.interests.get(groupName);
+    	if (followGroup!= null) {
+    		return followGroup;
     	}
-    	return followGroup;
+    	return Collections.emptyList();
     }
 
     public List<U> getFollowedUsers() {
