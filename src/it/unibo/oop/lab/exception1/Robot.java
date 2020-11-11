@@ -34,12 +34,9 @@ public class Robot {
 	 */
 	public boolean moveUp() {
 		try {
-			this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
-		} catch (PositionOutOfBoundException e) {
-			this.log("Can not move Up");
-			return false;
+			this.moveToPosition(environment.getCurrPosX(), 
+					this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
 		} catch (NotEnoughBatteryException e) {
-			this.log(e + "IMMA CHARGE NOW");
 			return false;
 		}
 		return true;
@@ -52,11 +49,9 @@ public class Robot {
 	 */
 	public boolean moveDown() {
 		try {
-			this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
-		} catch (PositionOutOfBoundException e) {
-			this.log("Can not move Down");
+			this.moveToPosition(this.environment.getCurrPosX(), 
+					environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
 		} catch (NotEnoughBatteryException e) {
-			this.log(e + "IMMA CHARGE NOW");
 			return false;
 		}
 		return true;
@@ -69,10 +64,8 @@ public class Robot {
 	 */
 	public boolean moveLeft() {
 		try {
-			this.moveToPosition(this.environment.getCurrPosX() - Robot.MOVEMENT_DELTA, this.environment.getCurrPosY());
-		} catch (PositionOutOfBoundException e) {
-			this.log("Can not move to the Left");
-			return false;
+			this.moveToPosition(this.environment.getCurrPosX() -
+					Robot.MOVEMENT_DELTA, this.environment.getCurrPosY());
 		} catch (NotEnoughBatteryException e) {
 			this.log(e + "IMMA CHARGE NOW");
 			return false;
@@ -87,10 +80,8 @@ public class Robot {
 	 */
 	public boolean moveRight() {
 		try {
-			this.moveToPosition(this.environment.getCurrPosX() + Robot.MOVEMENT_DELTA, this.environment.getCurrPosY());
-		} catch (PositionOutOfBoundException e) {
-			this.log("Can not move to Right");
-			return false;
+			this.moveToPosition(this.environment.getCurrPosX() + 
+					Robot.MOVEMENT_DELTA, this.environment.getCurrPosY());
 		} catch (NotEnoughBatteryException e) {
 			this.log(e + "IMMA CHARGE NOW");
 			return false;
@@ -118,12 +109,15 @@ public class Robot {
 			this.consumeBatteryForMovement();
 			this.log("Moved to position(" + newX + "," + newY + ").");
 		} else {
-			throw new NotEnoughBatteryException();
+			throw new NotEnoughBatteryException(this.batteryLevel, 
+					Robot.MOVEMENT_DELTA_CONSUMPTION
+				);
 		}
 	}
 
 	/**
-	 * Consume the amount of energy required to move the robot substracting it from
+	 * Consume the amount of energy required to move the robot 
+	 * substracting it from
 	 * the current battery level.
 	 */
 	protected void consumeBatteryForMovement() {
