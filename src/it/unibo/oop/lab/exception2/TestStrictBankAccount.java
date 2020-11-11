@@ -12,7 +12,6 @@ import org.junit.Test;
  */
 public class TestStrictBankAccount {
 
-
     private static final int INITIAL_AMOUNT = 10_000;
     private static final int TOO_MUCH = 50_000;
 
@@ -46,7 +45,8 @@ public class TestStrictBankAccount {
             try {
                 account2.depositFromATM(usr2.getUserID(), 1);
             } catch (TransactionsOverQuotaException | WrongAccountHolderException e) {
-                fail("Not exceeded yet max no. transactions!");
+                System.out.println(e);
+            	fail("Not exceeded yet max no. transactions!");
             }
         }
         /*

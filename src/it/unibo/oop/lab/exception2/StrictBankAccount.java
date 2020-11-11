@@ -62,7 +62,7 @@ public class StrictBankAccount implements BankAccount {
             this.deposit(usrID, amount - StrictBankAccount.ATM_TRANSACTION_FEE);
             nTransactions++;
         }else {
-        	throw new TransactionsOverQuotaException();
+        	throw new TransactionsOverQuotaException(nTransactions, nMaxATMTransactions);
         }
     }
 
@@ -74,7 +74,7 @@ public class StrictBankAccount implements BankAccount {
         if (nTransactions < nMaxATMTransactions) {
             this.withdraw(usrID, amount + StrictBankAccount.ATM_TRANSACTION_FEE);
         }else {
-        	throw new TransactionsOverQuotaException();
+        	throw new TransactionsOverQuotaException(nTransactions, nMaxATMTransactions);
         }
     }
 
@@ -111,14 +111,14 @@ public class StrictBankAccount implements BankAccount {
         if(this.usrID == id) {
         	return true;
         }
-        throw new WrongAccountHolderException();
+        throw new WrongAccountHolderException(id,usrID);
     }
 
     private boolean isWithdrawAllowed(final double amount) {
         if(balance > amount) {
         	return true;
         }
-        throw new NotEnoughFoundsException();
+        throw new NotEnoughFoundsException(balance, amount);
     }
 
     private void incTransactions() {
