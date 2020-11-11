@@ -126,13 +126,11 @@ public final class UseCollection {
          * 
          * Oceania -> 38,304,000
          */
-        final Map<String,Double> world = new HashMap<>();
-        world.put("Africa",1_110_635_000.0);
-        world.put("Americas", 972_005_000.0);
-        world.put("Antarctica", 0.0);
-        world.put("Asia", 4_298_723_000.0);
-        world.put("Europe", 742_452_000.0);
-        world.put("Oceania", 38_304_000.0);
+	    // final Map<String,Double> world = new HashMap<>();
+        final Map<String,Double> world = Map.of ("Africa", 1_110_635_000.0,
+				 "Americas", 972_005_000.0, "Antarctica", 0.0,
+				 "Asia", 4_298_723_000.0, "Europe", 742_452_000.0,  
+				 "Oceania", 38_304_000.0);
         /*
          * 8) Compute the population of the world
          */
