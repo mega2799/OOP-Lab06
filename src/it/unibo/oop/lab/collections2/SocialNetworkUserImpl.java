@@ -15,7 +15,8 @@ import java.util.*;
  * @param <U>
  *            Specific user type
  */
-public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U> {
+public class SocialNetworkUserImpl<U extends User> 
+	extends UserImpl implements SocialNetworkUser<U> {
 
     /*
      * 
@@ -54,11 +55,14 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      *            alias of the user, i.e. the way a user is identified on an
      *            application
      */
-    public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(name, surname, user, userAge);
+    public SocialNetworkUserImpl(final String name, final String surname, 
+			final String user) {
+        super(name, surname, user, -1);
     }
-    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
-        super(name, surname, user);
+
+     public SocialNetworkUserImpl(final String name, final String surname, 
+			final String user, final int userAge) {
+        super(name, surname, user, userAge);
     }
     /*
      * [METHODS]
@@ -76,15 +80,15 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     }
 
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-    	Collection<U> followGroup = this.interests.get(groupName);
+    	final Collection<U> followGroup = this.interests.get(groupName);
     	if (followGroup!= null) {
     		return followGroup;
     	}
-    	return Collections.emptyList();
+    	return followGroup;
     }
 
     public List<U> getFollowedUsers() {
-    	List<U> follows = new ArrayList<U>();
+    	final List<U> follows = new ArrayList<U>();
     	for(String iterator : this.interests.keySet()) {
     		follows.addAll(this.interests.get(iterator));
     	}
