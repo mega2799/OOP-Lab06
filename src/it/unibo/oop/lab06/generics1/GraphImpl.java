@@ -4,7 +4,6 @@ import java.util.*;
 
 public class GraphImpl<N> implements Graph<N> {
 	
-	final List<N> vicini = new ArrayList<>();
 	final private Map<N,Set<N>> edges = new HashMap<>();
 	
 	@Override
