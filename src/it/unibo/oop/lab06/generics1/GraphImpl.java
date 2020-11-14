@@ -29,23 +29,24 @@ public class GraphImpl<N> implements Graph<N> {
 		return this.edges.get(node);
 	}
 
-//	final List<N> simpleList = new LinkedList<>();
-
-	public List<N> pathFinder(N source, N target,List<N> list) {
-		list.add(source);
-		for( N ite : this.edges.get(source)){
-			if (ite.equals(target)){
-				list.add(target);
-				return list;
-			} else {
-				return pathFinder(ite,target,list);
+	public void pathFinder(N source, N target,List<N> list) {
+		if(!list.contains(source)) {
+			list.add(source);
+			for( N ite : this.edges.get(source)){
+				if (ite.equals(target)){
+					list.add(target);
+					return;
+				}
+				if ( this.edges.get(ite).contains(target)) { // usilo con saggezza 
+						pathFinder(ite,target,list);
+				}
 			}
 		}
-		return null; // fail 
 	}
 	
 	public List<N> getPath(N source, N target) {
 		final List<N> simpleList = new LinkedList<>();
-		return pathFinder(source,target,simpleList);
+			pathFinder(source,target,simpleList);
+			return simpleList;
 	}
 }
